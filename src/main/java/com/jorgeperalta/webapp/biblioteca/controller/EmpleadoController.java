@@ -45,8 +45,12 @@ public class EmpleadoController {
     public ResponseEntity<Map<String, Boolean>> agregarEmpleado(@RequestBody Empleado empleado){
         Map<String, Boolean> response = new HashMap<>();
         try {
-            empleadoService.guardarEmpleado(empleado);
+            if (empleadoService.guardarEmpleado(empleado)) {
             response.put("Se agrego con exito", Boolean.TRUE);
+            }else{
+                response.put("DPI duplicado", Boolean.FALSE);
+                return ResponseEntity.badRequest().body(response);
+            }
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("Se agrego con exito", Boolean.FALSE);
@@ -54,7 +58,7 @@ public class EmpleadoController {
         }
     }
 
-    /* */
+
 
     @PutMapping("/empleado")
     public ResponseEntity<Map<String, Boolean>> editarEmpleado(@RequestParam Long id, @RequestBody Empleado empleadoNuevo){
