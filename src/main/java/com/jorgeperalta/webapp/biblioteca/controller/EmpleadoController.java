@@ -16,36 +16,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jorgeperalta.webapp.biblioteca.model.Categoria;
-import com.jorgeperalta.webapp.biblioteca.service.CategoriaService;
+import com.jorgeperalta.webapp.biblioteca.model.Empleado;
+import com.jorgeperalta.webapp.biblioteca.service.EmpleadoService;
 
 @Controller
 @RestController
 @RequestMapping(value = "")
-public class CategoriaController{
+public class EmpleadoController {
 
     @Autowired
-    CategoriaService categoriaService;
+    EmpleadoService empleadoService;
 
-    @GetMapping("/categorias")
-    public List<Categoria> listaCategorias(){
-        return categoriaService.listarCategorias();
+    @GetMapping("/empleados")
+    public List<Empleado> listaEmpleados(){
+        return empleadoService.listarEmpleados();
     }
 
-    @GetMapping("/categoria")
-    public ResponseEntity<Categoria> buscarCategoriaPorId(@RequestParam Long id){
+    @GetMapping("/empleado")
+    public ResponseEntity<Empleado> buscarEmpleadoPorId(@RequestParam Long id){
         try {
-            return ResponseEntity.ok(categoriaService.buscarCategoriaPorId(id));
+            return ResponseEntity.ok(empleadoService.buscarEmpleadoPorId(id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
     }
 
-    @PostMapping("/categoria")
-    public ResponseEntity<Map<String, Boolean>> agregarCategoria(@RequestBody Categoria categoria){
+    @PostMapping("/empleado")
+    public ResponseEntity<Map<String, Boolean>> agregarEmpleado(@RequestBody Empleado empleado){
         Map<String, Boolean> response = new HashMap<>();
         try {
-            categoriaService.guardarCategoria(categoria);
+            empleadoService.guardarEmpleado(empleado);
             response.put("Se agrego con exito", Boolean.TRUE);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -54,13 +54,17 @@ public class CategoriaController{
         }
     }
 
-    @PutMapping("/categoria")
-    public ResponseEntity<Map<String, Boolean>> editarCategoria(@RequestParam Long id, @RequestBody Categoria categoriaNueva){
+    @PutMapping("/empleado")
+    public ResponseEntity<Map<String, Boolean>> editarEmpleado(@RequestParam Long id, @RequestBody Empleado empleadoNuevo){
         Map<String, Boolean> response = new HashMap<>();
         try {
-            Categoria categoria = categoriaService.buscarCategoriaPorId(id);
-            categoria.setNombreCategoria(categoriaNueva.getNombreCategoria());
-            categoriaService.guardarCategoria(categoria);
+            Empleado empleado = empleadoService.buscarEmpleadoPorId(id);
+            empleado.setNombreEmpleado(empleadoNuevo.getNombreEmpleado());
+            empleado.setApellidoEmpleado(empleadoNuevo.getApellidoEmpleado());
+            empleado.setTelefonoEmpleado(empleadoNuevo.getTelefonoEmpleado());
+            empleado.setDireccion(empleadoNuevo.getDireccion());
+            empleado.setDpi(empleadoNuevo.getDpi());
+            empleadoService.guardarEmpleado(empleado);
             response.put("Editado con exito", Boolean.TRUE);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -69,16 +73,16 @@ public class CategoriaController{
         }
     }
 
-    @DeleteMapping("/categoria")
-    public ResponseEntity<Map<String, Boolean>> eliminarCategoria(@RequestParam Long id){
+    @DeleteMapping("/empleado")
+    public ResponseEntity<Map<String, Boolean>> eliminarEmpleado(@RequestParam Long id){
         Map<String, Boolean> response = new HashMap<>();
         try {
-            Categoria categoria = categoriaService.buscarCategoriaPorId(id);
-            categoriaService.eliminarCategoria(categoria);
-            response.put("Categoria Eliminada", Boolean.TRUE);          
+            Empleado empleado = empleadoService.buscarEmpleadoPorId(id);
+            empleadoService.eliminarEmpleado(empleado);
+            response.put("Empleado Eliminado", Boolean.TRUE);          
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.put("Categoria Eliminada",Boolean.FALSE);
+            response.put("Empleado Eliminado",Boolean.FALSE);
             return ResponseEntity.badRequest().body(response);
         }
     }
