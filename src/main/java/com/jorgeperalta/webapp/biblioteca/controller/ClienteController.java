@@ -17,37 +17,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jorgeperalta.webapp.biblioteca.model.Categoria;
-import com.jorgeperalta.webapp.biblioteca.service.CategoriaService;
+import com.jorgeperalta.webapp.biblioteca.model.Cliente;
+import com.jorgeperalta.webapp.biblioteca.service.ClienteService;
 
 @Controller
 @RestController
 @RequestMapping(value = "")
-public class CategoriaController{
+public class ClienteController{
 
     @Autowired
-    CategoriaService categoriaService;
+    ClienteService clienteService;
 
-    @GetMapping("/categorias")
-    public List<Categoria> listaCategorias(){
-        return categoriaService.listarCategorias();
+    @GetMapping("/clientes")
+    public List<Cliente> listaClientes(){
+        return clienteService.listarClientes();
     }
 
-    @GetMapping("/categoria")
-    public ResponseEntity<Categoria> buscarCategoriaPorId(@RequestParam Long id){
+    @GetMapping("/cliente")
+    public ResponseEntity<Cliente> buscarClientePorId(@RequestParam Long dpi){
         try {
-            return ResponseEntity.ok(categoriaService.buscarCategoriaPorId(id));
+            return ResponseEntity.ok(clienteService.buscarClientePorId(dpi));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
     }
 
 
-    @PostMapping("/categoria")
-    public ResponseEntity<Map<String, Boolean>> agregarCategoria(@RequestBody Categoria categoria){
+    @PostMapping("/cliente")
+    public ResponseEntity<Map<String, Boolean>> agregarCliente(@RequestBody Cliente cliente){
         Map<String, Boolean> response = new HashMap<>();
         try {
-            categoriaService.guardarCategoria(categoria);
+            clienteService.guardarCliente(cliente);
             response.put("Se agrego con exito", Boolean.TRUE);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -56,13 +56,15 @@ public class CategoriaController{
         }
     }
 
-    @PutMapping("/categoria")
-    public ResponseEntity<Map<String, Boolean>> editarCategoria(@RequestParam Long id, @RequestBody Categoria categoriaNueva){
+    @PutMapping("/cliente")
+    public ResponseEntity<Map<String, Boolean>> editarCliente(@RequestParam Long dpi, @RequestBody Cliente clienteNueva){
         Map<String, Boolean> response = new HashMap<>();
         try {
-            Categoria categoria = categoriaService.buscarCategoriaPorId(id);
-            categoria.setNombreCategoria(categoriaNueva.getNombreCategoria());
-            categoriaService.guardarCategoria(categoria);
+            Cliente cliente = clienteService.buscarClientePorId(dpi);
+            cliente.setNombreCliente(clienteNueva.getNombreCliente());
+            cliente.setApellidoCliente(clienteNueva.getApellidoCliente());
+            cliente.setTelefono(clienteNueva.getTelefono());
+            clienteService.guardarCliente(cliente);
             response.put("Editado con exito", Boolean.TRUE);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -71,16 +73,16 @@ public class CategoriaController{
         }
     }
 
-    @DeleteMapping("/categoria")
-    public ResponseEntity<Map<String, Boolean>> eliminarCategoria(@RequestParam Long id){
+    @DeleteMapping("/cliente")
+    public ResponseEntity<Map<String, Boolean>> eliminarCliente(@RequestParam Long dpi){
         Map<String, Boolean> response = new HashMap<>();
         try {
-            Categoria categoria = categoriaService.buscarCategoriaPorId(id);
-            categoriaService.eliminarCategoria(categoria);
-            response.put("Categoria Eliminada", Boolean.TRUE);          
+            Cliente cliente = clienteService.buscarClientePorId(dpi);
+            clienteService.eliminarCliente(cliente);
+            response.put("Cliente Eliminada", Boolean.TRUE);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.put("Categoria Eliminada",Boolean.FALSE);
+            response.put("Cliente Eliminada",Boolean.FALSE);
             return ResponseEntity.badRequest().body(response);
         }
     }
