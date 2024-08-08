@@ -54,6 +54,8 @@ public class EmpleadoController {
         }
     }
 
+    /* */
+
     @PutMapping("/empleado")
     public ResponseEntity<Map<String, Boolean>> editarEmpleado(@RequestParam Long id, @RequestBody Empleado empleadoNuevo){
         Map<String, Boolean> response = new HashMap<>();
