@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jorgeperalta.webapp.biblioteca.model.Prestamo;
 import com.jorgeperalta.webapp.biblioteca.service.PrestamoService;
+import com.jorgeperalta.webapp.biblioteca.util.MethodType;
 
 @Controller
 @RestController
@@ -49,11 +50,15 @@ public class PrestamoController {
     public ResponseEntity<Map<String, Boolean>> agregarPrestamo(@RequestBody Prestamo prestamo){
         Map<String,Boolean> response = new HashMap<>();
         try {
-            prestamoService.guardarPrestamo(prestamo);
-            response.put("Se agrego con exito", Boolean.TRUE);
-            return ResponseEntity.ok(response);
+            if (prestamoService.guardarPrestamo(prestamo)) {
+                response.put("Se agrego con exito", Boolean.TRUE);
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("No se agrego por el prestomo", Boolean.FALSE);
+                return ResponseEntity.badRequest().body(response);
+            }
         } catch (Exception e) {
-            response.put("Se agrego con exito", Boolean.TRUE);
+            response.put("Se agrego con exito", Boolean.FALSE);
             return ResponseEntity.badRequest().body(response);
         }
     }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jorgeperalta.webapp.biblioteca.model.Prestamo;
 import com.jorgeperalta.webapp.biblioteca.repository.PrestamoRepository;
+import com.jorgeperalta.webapp.biblioteca.util.MethodType;
 
 @Service
 public class PrestamoService implements IPrestamoService {
@@ -25,8 +26,13 @@ public class PrestamoService implements IPrestamoService {
     }
 
     @Override
-    public Prestamo guardarPrestamo(Prestamo prestamo){
-        return prestamoRepository.save(prestamo);
+    public Boolean guardarPrestamo(Prestamo prestamo){
+        if(!verificarPrestamoActivo(prestamo)){ //Categoria no duplicada
+            prestamoRepository.save(prestamo);
+            return true;
+        }else{ //Categoria duplicada   
+            return false;
+        }
     }
 
     @Override
@@ -34,5 +40,17 @@ public class PrestamoService implements IPrestamoService {
         prestamoRepository.delete(prestamo);
     }
 
+    @Override
+    public Boolean verificarPrestamoActivo(Prestamo prestamoNuevo){
+        List<Prestamo> prestamos = listarPrestamos();
+        Boolean flag = false;
+        
+        for (Prestamo prestamo : prestamos) {
+            if(prestamoNuevo.getCliente().getDpi().equals(prestamo.getCliente().getDpi()) && prestamo.getVigencia() == true){
+                flag = true; 
+            }
+        }
+        return flag;
+    }
 
 }
