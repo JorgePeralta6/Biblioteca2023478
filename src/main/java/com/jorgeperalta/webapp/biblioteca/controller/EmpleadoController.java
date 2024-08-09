@@ -46,12 +46,12 @@ public class EmpleadoController {
         Map<String, Boolean> response = new HashMap<>();
         try {
             if (empleadoService.guardarEmpleado(empleado)) {
-            response.put("Se agrego con exito", Boolean.TRUE);
+                response.put("Se agrego con exito", Boolean.TRUE);
+                return ResponseEntity.ok(response);
             }else{
                 response.put("DPI duplicado", Boolean.FALSE);
                 return ResponseEntity.badRequest().body(response);
             }
-            return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("Se agrego con exito", Boolean.FALSE);
             return ResponseEntity.badRequest().body(response);
@@ -70,9 +70,13 @@ public class EmpleadoController {
             empleado.setTelefonoEmpleado(empleadoNuevo.getTelefonoEmpleado());
             empleado.setDireccion(empleadoNuevo.getDireccion());
             empleado.setDpi(empleadoNuevo.getDpi());
-            empleadoService.guardarEmpleado(empleado);
-            response.put("Editado con exito", Boolean.TRUE);
-            return ResponseEntity.ok(response);
+            if (empleadoService.guardarEmpleado(empleado)) {
+                response.put("Editado con exito", Boolean.TRUE);
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("Editado con exito", Boolean.FALSE);
+                return ResponseEntity.badRequest().body(response);
+            }
         } catch (Exception e) {
             response.put("Editado con exito", Boolean.FALSE);
             return ResponseEntity.badRequest().body(response);

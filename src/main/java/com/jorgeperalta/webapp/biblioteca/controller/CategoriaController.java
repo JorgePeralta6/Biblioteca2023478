@@ -45,9 +45,13 @@ public class CategoriaController{
     public ResponseEntity<Map<String, Boolean>> agregarCategoria(@RequestBody Categoria categoria){
         Map<String, Boolean> response = new HashMap<>();
         try {
-            categoriaService.guardarCategoria(categoria);
-            response.put("Se agrego con exito", Boolean.TRUE);
-            return ResponseEntity.ok(response);
+            if (categoriaService.guardarCategoria(categoria)) {
+                response.put("Se agrego con exito", Boolean.TRUE);
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("Se agrego con exito", Boolean.FALSE);
+                return ResponseEntity.badRequest().body(response);
+            }
         } catch (Exception e) {
             response.put("Se agrego con exito", Boolean.FALSE);
             return ResponseEntity.badRequest().body(response);
@@ -60,9 +64,13 @@ public class CategoriaController{
         try {
             Categoria categoria = categoriaService.buscarCategoriaPorId(id);
             categoria.setNombreCategoria(categoriaNueva.getNombreCategoria());
-            categoriaService.guardarCategoria(categoria);
-            response.put("Editado con exito", Boolean.TRUE);
-            return ResponseEntity.ok(response);
+            if (categoriaService.guardarCategoria(categoria)) {
+                response.put("Editado con exito", Boolean.TRUE);
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("Editado con exito", Boolean.FALSE);
+                return ResponseEntity.badRequest().body(response);
+            }
         } catch (Exception e) {
             response.put("Editado con exito", Boolean.FALSE);
             return ResponseEntity.badRequest().body(response);
