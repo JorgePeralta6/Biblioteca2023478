@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jorgeperalta.webapp.biblioteca.model.Prestamo;
 import com.jorgeperalta.webapp.biblioteca.service.PrestamoService;
-import com.jorgeperalta.webapp.biblioteca.util.MethodType;
+
 
 @Controller
 @RestController

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jorgeperalta.webapp.biblioteca.model.Prestamo;
 import com.jorgeperalta.webapp.biblioteca.repository.PrestamoRepository;
-import com.jorgeperalta.webapp.biblioteca.util.MethodType;
+
 
 @Service
 public class PrestamoService implements IPrestamoService {
