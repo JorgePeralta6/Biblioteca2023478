@@ -32,6 +32,8 @@ public class IndexController implements Initializable {
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnMenuCategoria){
             stage.categoriaView();
+        }else if(event.getSource() == btnMenuCliente){
+            stage.clienteView();
         }
     }
    

@@ -8,6 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import com.jorgeperalta.webapp.biblioteca.BibliotecaApplication;
 import com.jorgeperalta.webapp.biblioteca.controller.FXController.CategoriaControllerFx;
+import com.jorgeperalta.webapp.biblioteca.controller.FXController.ClienteControllerFx;
 import com.jorgeperalta.webapp.biblioteca.controller.FXController.IndexController;
 
 import javafx.application.Application;
@@ -67,6 +68,15 @@ public class Main extends Application {
         try {
             CategoriaControllerFx categoriaView = (CategoriaControllerFx)switchScene("categoriaView.fxml", 1000, 700);
             categoriaView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clienteView(){
+        try {
+            ClienteControllerFx clienteView = (ClienteControllerFx)switchScene("clienteView.fxml", 1000, 700);
+            clienteView.setStage(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
