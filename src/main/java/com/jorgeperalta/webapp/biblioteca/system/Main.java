@@ -7,6 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.jorgeperalta.webapp.biblioteca.BibliotecaApplication;
+import com.jorgeperalta.webapp.biblioteca.controller.FXController.CategoriaControllerFx;
 import com.jorgeperalta.webapp.biblioteca.controller.FXController.IndexController;
 
 import javafx.application.Application;
@@ -29,9 +30,9 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-       this.stage = primaryStage;
-       stage.setTitle("Biblioteca Kinal Spring");
+    public void start(Stage stage) throws Exception {
+       this.stage = stage;
+       stage.setTitle("Biblioteca Kinal");
        indexView();
        stage.show();
     }
@@ -55,8 +56,17 @@ public class Main extends Application {
 
     public void indexView(){
         try {
-            IndexController indexView = (IndexController)switchScene("index.fxml", 600, 400);
+            IndexController indexView = (IndexController)switchScene("index.fxml", 1200, 700);
             indexView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void categoriaView(){
+        try {
+            CategoriaControllerFx categoriaView = (CategoriaControllerFx)switchScene("categoriaView.fxml", 1000, 700);
+            categoriaView.setStage(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
