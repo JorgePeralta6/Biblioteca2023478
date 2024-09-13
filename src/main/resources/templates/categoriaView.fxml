@@ -17,14 +17,17 @@
       </ImageView>
       <TextField fx:id="tfId" editable="false" layoutX="38.0" layoutY="200.0" prefHeight="43.0" prefWidth="390.0" promptText="id" />
       <TextField fx:id="tfNombre" layoutX="38.0" layoutY="297.0" prefHeight="43.0" prefWidth="390.0" promptText="nombre" />
-      <TableView fx:id="tblCategoria" layoutX="38.0" layoutY="360.0" onMouseClicked="#cargarFormEditar" prefHeight="315.0" prefWidth="456.0">
+      <TableView fx:id="tblCategoria" layoutX="38.0" layoutY="371.0" onMouseClicked="#cargarFormEditar" opacity="0.74" prefHeight="315.0" prefWidth="456.0" style="-fx-background-radius: 20;">
         <columns>
           <TableColumn fx:id="colId" prefWidth="126.0" text="Id" />
           <TableColumn fx:id="colNombre" prefWidth="329.0" text="Nombre De La Categoria" />
         </columns>
       </TableView>
-      <Button fx:id="btnEliminar" layoutX="513.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #213635;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" />
-      <Button fx:id="btnGuardar" layoutX="513.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="85.0" style="-fx-background-color: #213635;" text="Guardar" textAlignment="CENTER" textFill="WHITE" />
-      <Button fx:id="btnLimpiar" layoutX="510.0" layoutY="448.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="91.0" style="-fx-background-color: #213635;" text="Limpiar Formulario" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+      <Button fx:id="btnEliminar" layoutX="513.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #213635; -fx-background-radius: 15;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="btnGuardar" layoutX="513.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="85.0" style="-fx-background-color: #213635; -fx-background-radius: 15;" text="Guardar" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="btnLimpiar" layoutX="510.0" layoutY="448.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="91.0" style="-fx-background-color: #213635; -fx-background-radius: 15;" text="Limpiar Formulario" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+      <TextField fx:id="tfBuscar" layoutX="494.0" layoutY="340.0" promptText="Buscar" />
+      <Button fx:id="btnBuscar" layoutX="619.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="85.0" style="-fx-background-color: #213635; -fx-background-radius: 15;" text="Buscar" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="btnRegresar" layoutX="878.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="85.0" style="-fx-background-color: #213635; -fx-background-radius: 15;" text="Regresar" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

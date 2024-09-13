@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jorgeperalta.webapp.biblioteca.controller.FXController.ClienteControllerFx">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
@@ -20,16 +19,19 @@
       <TextField fx:id="tfNombreCliente" layoutX="24.0" layoutY="286.0" promptText="Nombre" />
       <TextField fx:id="tfApellido" layoutX="24.0" layoutY="373.0" promptText="Apellido" />
       <TextField fx:id="tfTelefono" layoutX="24.0" layoutY="446.0" promptText="Telefono" />
-      <TableView fx:id="tblCliente" layoutX="449.0" layoutY="257.0" onMouseClicked="#cargarFormEditar" prefHeight="352.0" prefWidth="531.0">
+      <TableView fx:id="tblCliente" layoutX="393.0" layoutY="252.0" onMouseClicked="#cargarFormEditar" prefHeight="363.0" prefWidth="576.0">
         <columns>
-          <TableColumn fx:id="colDpi" prefWidth="85.0" text="DPI" />
-          <TableColumn fx:id="colNombreCliente" prefWidth="169.0" text="Nombre" />
-            <TableColumn fx:id="colApellido" prefWidth="158.0" text="Apellido" />
-            <TableColumn fx:id="colTelefono" prefWidth="118.0" text="Telefono" />
+          <TableColumn fx:id="colDpi" prefWidth="90.0" text="DPI" />
+          <TableColumn fx:id="colNombreCliente" prefWidth="189.0" text="Nombre" />
+            <TableColumn fx:id="colApellido" prefWidth="167.0" text="Apellido" />
+            <TableColumn fx:id="colTelefono" prefWidth="129.0" text="Telefono" />
         </columns>
       </TableView>
-      <Button fx:id="btnGuardar" layoutX="458.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="85.0" style="-fx-background-color: #213635;" text="Guardar" textAlignment="CENTER" textFill="WHITE" />
-      <Button fx:id="btnLimpiar" layoutX="567.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="91.0" style="-fx-background-color: #213635;" text="Limpiar Formulario" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-      <Button fx:id="btnEliminar" layoutX="884.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #213635;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="btnGuardar" layoutX="458.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="85.0" style="-fx-background-color: #1c5052; -fx-background-radius: 15;" text="Guardar" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="btnLimpiar" layoutX="567.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="91.0" style="-fx-background-color: #1c5052; -fx-background-radius: 15;" text="Limpiar Formulario" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+      <Button fx:id="btnEliminar" layoutX="884.0" layoutY="621.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #1c5052; -fx-background-radius: 15;" text="Eliminar" textAlignment="CENTER" textFill="WHITE" />
+      <TextField fx:id="tfBuscar" layoutX="735.0" layoutY="209.0" promptText="Buscar" />
+      <Button fx:id="btnBuscar" layoutX="884.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="85.0" style="-fx-background-color: #1c5052; -fx-background-radius: 15;" text="Buscar" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="btnRegresar" layoutX="887.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="85.0" style="-fx-background-color: #1c5052; -fx-background-radius: 15;" text="Regresar" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

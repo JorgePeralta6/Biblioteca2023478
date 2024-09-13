@@ -9,7 +9,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import com.jorgeperalta.webapp.biblioteca.BibliotecaApplication;
 import com.jorgeperalta.webapp.biblioteca.controller.FXController.CategoriaControllerFx;
 import com.jorgeperalta.webapp.biblioteca.controller.FXController.ClienteControllerFx;
+import com.jorgeperalta.webapp.biblioteca.controller.FXController.EmpleadoControllerFx;
 import com.jorgeperalta.webapp.biblioteca.controller.FXController.IndexController;
+import com.jorgeperalta.webapp.biblioteca.controller.FXController.LibroControllerFx;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -81,5 +83,22 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
+    public void empleadoView(){
+        try {
+            EmpleadoControllerFx empleadoView = (EmpleadoControllerFx)switchScene("empleadoView.fxml", 1000, 700);
+            empleadoView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void libroView(){
+        try {
+            LibroControllerFx libroView = (LibroControllerFx)switchScene("libroView.fxml", 1100, 700);
+            libroView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

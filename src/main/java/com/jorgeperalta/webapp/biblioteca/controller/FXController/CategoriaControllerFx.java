@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.jorgeperalta.webapp.biblioteca.model.Categoria;
+import com.jorgeperalta.webapp.biblioteca.model.Libro;
 import com.jorgeperalta.webapp.biblioteca.service.CategoriaService;
 import com.jorgeperalta.webapp.biblioteca.system.Main;
 
@@ -26,9 +27,9 @@ import lombok.Setter;
 @Component
 public class CategoriaControllerFx implements Initializable {
     @FXML
-    TextField tfId, tfNombre;
+    TextField tfId, tfNombre, tfBuscar;
     @FXML
-    Button btnGuardar, btnLimpiar, btnEliminar;
+    Button btnGuardar, btnLimpiar, btnEliminar, btnRegresar, btnBuscar;
     @FXML
     TableView tblCategoria;
     @FXML
@@ -45,17 +46,29 @@ public class CategoriaControllerFx implements Initializable {
         cargarDatos();
     }
 
-    public void handleButtonAction(ActionEvent event){
+    @FXML
+    public void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnGuardar) {
             if (tfId.getText().isBlank()) {
-                agregarCategoria(); 
-            }else{
-                editarCategoria();  
+                agregarCategoria();
+            } else {
+                editarCategoria();
             }
-        }else if(event.getSource() == btnLimpiar){
+        } else if (event.getSource() == btnLimpiar) {
             limpiarFormEditar();
-        }else if(event.getSource() == btnEliminar){
+        } else if (event.getSource() == btnRegresar) {
+            stage.indexView();
+        } else if (event.getSource() == btnEliminar) {
             eliminarCategoria();
+        } else if (event.getSource() == btnBuscar) {
+            tblCategoria.getItems().clear();
+            if (tfBuscar.getText().isBlank()) {
+                cargarDatos();
+            } else {
+                tblCategoria.getItems().add(buscarCategoria());
+                colId.setCellValueFactory(new PropertyValueFactory<Categoria, Long>("id"));
+                colNombre.setCellValueFactory(new PropertyValueFactory<Categoria, String>("nombreCategoria"));
+            }
         }
     }
 
@@ -102,6 +115,10 @@ public class CategoriaControllerFx implements Initializable {
         Categoria categoria = categoriaService.buscarCategoriaPorId(Long.parseLong(tfId.getText()));
         categoriaService.eliminarCategoria(categoria);
         cargarDatos();
-    }    
+    }   
+    
+    public Categoria buscarCategoria() {
+        return categoriaService.buscarCategoriaPorId(Long.parseLong(tfBuscar.getText()));
+    }
 
 }

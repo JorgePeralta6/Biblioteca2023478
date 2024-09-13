@@ -26,9 +26,9 @@ import lombok.Setter;
 @Component
 public class ClienteControllerFx implements Initializable {
     @FXML
-    TextField tfDpi, tfNombreCliente, tfApellido, tfTelefono;
+    TextField tfDpi, tfNombreCliente, tfApellido, tfTelefono, tfBuscar;
     @FXML
-    Button btnGuardar, btnLimpiar, btnEliminar;
+    Button btnGuardar, btnLimpiar, btnEliminar, btnRegresar, btnBuscar;
     @FXML
     TableView tblCliente;
     @FXML
@@ -36,6 +36,8 @@ public class ClienteControllerFx implements Initializable {
 
     @Setter
     private Main stage;
+
+    private Boolean modificar = false;
 
     @Autowired
     ClienteService clienteService;
@@ -45,17 +47,31 @@ public class ClienteControllerFx implements Initializable {
         cargarDatos();
     }
 
-    public void handleButtonAction(ActionEvent event){
+    @FXML
+    public void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnGuardar) {
-            if (tfDpi.getText().isBlank()) {
-                agregarCliente(); 
-            }else{
-                editarCliente();  
+            if (!modificar) {
+                agregarCliente();
+            } else {
+                editarCliente();
             }
-        }else if(event.getSource() == btnLimpiar){
+        } else if (event.getSource() == btnLimpiar) {
             limpiarFormEditar();
-        }else if(event.getSource() == btnEliminar){
+        } else if (event.getSource() == btnRegresar) {
+            stage.indexView();
+        } else if (event.getSource() == btnEliminar) {
             eliminarCliente();
+        } else if (event.getSource() == btnBuscar) {
+            tblCliente.getItems().clear();
+            if (tfBuscar.getText().isBlank()) {
+                cargarDatos();
+            } else {
+                tblCliente.getItems().add(buscarCliente());
+                colDpi.setCellValueFactory(new PropertyValueFactory<Cliente, Long>("dpi"));
+                colNombreCliente.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nombreCliente"));
+                colApellido.setCellValueFactory(new PropertyValueFactory<Cliente, String>("apellidoCliente"));
+                colTelefono.setCellValueFactory(new PropertyValueFactory<Cliente, String>("telefono"));
+            }
         }
     }
 
@@ -75,6 +91,7 @@ public class ClienteControllerFx implements Initializable {
             tfNombreCliente.setText(cliente.getNombreCliente());
             tfApellido.setText(cliente.getApellidoCliente());
             tfTelefono.setText(cliente.getTelefono());
+            modificar = true;
         }
     }
 
@@ -101,7 +118,6 @@ public class ClienteControllerFx implements Initializable {
 
     public void editarCliente(){
         Cliente cliente = clienteService.buscarClientePorId(Long.parseLong(tfDpi.getText()));
-        cliente.setDpi(Long.parseLong(tfDpi.getText()));
         cliente.setNombreCliente(tfNombreCliente.getText());
         cliente.setApellidoCliente(tfApellido.getText());
         cliente.setTelefono(tfTelefono.getText());
@@ -114,5 +130,9 @@ public class ClienteControllerFx implements Initializable {
         clienteService.eliminarCliente(cliente);
         cargarDatos();
     }    
+
+    public Cliente buscarCliente() {
+        return clienteService.buscarClientePorId(Long.parseLong(tfBuscar.getText()));
+    }
 
 }
