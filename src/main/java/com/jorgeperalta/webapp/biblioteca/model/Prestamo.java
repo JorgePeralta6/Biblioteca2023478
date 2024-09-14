@@ -1,6 +1,6 @@
 package com.jorgeperalta.webapp.biblioteca.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -21,8 +21,8 @@ public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date fechaDePrestamo;
-    private Date fechaDeDevolucion;
+    private LocalDate fechaDePrestamo;
+    private LocalDate fechaDeDevolucion;
     private Boolean vigencia;
     @ManyToOne
     private Empleado empleado;
@@ -34,3 +34,4 @@ public class Prestamo {
     inverseJoinColumns = @JoinColumn(name = "libros_id", referencedColumnName = "id"))
     private List<Libro> libros;
 }
+

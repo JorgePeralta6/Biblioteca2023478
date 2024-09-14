@@ -38,6 +38,8 @@ public class IndexController implements Initializable {
             stage.empleadoView();
         }else if(event.getSource() == btnMenuLibro){
             stage.libroView();
+        }else if(event.getSource() == btnMenuPrestamo){
+            stage.prestamoView();
         }
     }
    
